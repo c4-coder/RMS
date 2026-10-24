@@ -57,6 +57,16 @@ export type DemoWorkspace = {
   role: string
 }
 
+export type DemoLibrary = {
+  id: string
+  name: string
+  workspaceId: string
+  description: string
+  documentCount: number
+  classification: 'Public' | 'Internal' | 'Confidential' | 'Restricted'
+  retention: string
+}
+
 export type DemoMember = {
   id: string
   name: string
@@ -65,4 +75,12 @@ export type DemoMember = {
   department: string
   status: 'Active' | 'Invited' | 'Suspended'
   lastActive: string
+}
+
+export type DemoGroup = {
+  id: string
+  name: string
+  description: string
+  memberIds: string[]
+  updatedAt: string
 }

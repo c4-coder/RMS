@@ -1,4 +1,4 @@
-import type { DemoActivity, DemoMember, DemoNotification, DemoTask, DemoWorkspace, RepositoryRecord } from './types'
+import type { DemoActivity, DemoGroup, DemoLibrary, DemoMember, DemoNotification, DemoTask, DemoWorkspace, RepositoryRecord } from './types'
 
 const now = new Date('2026-10-24T12:00:00')
 const daysAgo = (days: number) => new Date(now.getTime() - days * 86400000).toISOString()
@@ -58,10 +58,25 @@ export const demoWorkspaces: DemoWorkspace[] = [
   { id: 'space-legal', name: 'Legal & Compliance', description: 'Agreements, retention, and compliance records.', libraryCount: 3, memberCount: 7, documentCount: 316, color: 'violet', role: 'Viewer' },
 ]
 
+export const demoLibraries: DemoLibrary[] = [
+  { id: 'library-brand', name: 'Brand assets', workspaceId: 'space-brand', description: 'Approved identity files, templates, and campaigns.', documentCount: 92, classification: 'Internal', retention: '7 years' },
+  { id: 'library-campaigns', name: 'Campaigns', workspaceId: 'space-brand', description: 'Active and archived communications campaigns.', documentCount: 156, classification: 'Internal', retention: '5 years' },
+  { id: 'library-roadmap', name: 'Product roadmap', workspaceId: 'space-product', description: 'Product plans, research, and release materials.', documentCount: 218, classification: 'Confidential', retention: '7 years' },
+  { id: 'library-legal', name: 'Agreements', workspaceId: 'space-legal', description: 'Executed agreements and documents under review.', documentCount: 316, classification: 'Restricted', retention: 'Permanent' },
+  { id: 'library-people', name: 'People policies', workspaceId: 'space-people', description: 'Current employee policies and templates.', documentCount: 184, classification: 'Confidential', retention: '7 years' },
+]
+
 export const demoMembers: DemoMember[] = [
   { id: 'member-alex', name: 'Alex Morgan', email: 'alex@northstar.example', role: 'Workspace admin', department: 'Operations', status: 'Active', lastActive: 'Now' },
   { id: 'member-jamie', name: 'Jamie Lee', email: 'jamie@northstar.example', role: 'Content editor', department: 'Brand', status: 'Active', lastActive: '12 min ago' },
   { id: 'member-priya', name: 'Priya Shah', email: 'priya@northstar.example', role: 'Approver', department: 'Legal', status: 'Active', lastActive: '1 hour ago' },
   { id: 'member-morgan', name: 'Morgan Chen', email: 'morgan@northstar.example', role: 'Member', department: 'Product', status: 'Active', lastActive: 'Yesterday' },
   { id: 'member-sam', name: 'Sam Rivera', email: 'sam@northstar.example', role: 'Records manager', department: 'Operations', status: 'Invited', lastActive: 'Invitation pending' },
+]
+
+export const demoGroups: DemoGroup[] = [
+  { id: 'group-authors', name: 'Content authors', description: 'Members who create and maintain workspace content.', memberIds: ['member-alex', 'member-jamie', 'member-morgan'], updatedAt: daysAgo(2) },
+  { id: 'group-approvers', name: 'Legal approvers', description: 'Authorized reviewers for legal and policy workflows.', memberIds: ['member-priya', 'member-alex'], updatedAt: daysAgo(4) },
+  { id: 'group-records', name: 'Records officers', description: 'Records retention and disposition reviewers.', memberIds: ['member-sam', 'member-alex'], updatedAt: daysAgo(7) },
+  { id: 'group-admins', name: 'Workspace administrators', description: 'People responsible for workspace configuration.', memberIds: ['member-alex'], updatedAt: daysAgo(8) },
 ]
