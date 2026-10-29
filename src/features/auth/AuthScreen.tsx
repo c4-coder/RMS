@@ -11,7 +11,6 @@ import {
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
-import { demoCredentials } from '../demo/demoData'
 import { useDemoData } from '../demo/useDemoData'
 
 export type AuthMode = 'login' | 'register' | 'recovery'
@@ -52,7 +51,6 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<AuthFormValues>({
     resolver: zodResolver(createAuthSchema(mode)),
@@ -75,9 +73,7 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
     setLoginError('')
     if (mode === 'login') {
       if (!signIn(values.email, values.password)) {
-        setLoginError(
-          'Those demo credentials did not match. Use the details below or try again.',
-        )
+        setLoginError('The email or password you entered is incorrect.')
         return
       }
       navigate('/overview')
@@ -92,11 +88,6 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
     setFeedback(
       'Password recovery is a frontend preview. Recovery emails will be enabled when Supabase Auth is connected.',
     )
-  }
-
-  const fillDemoCredentials = () => {
-    setValue('email', demoCredentials.email, { shouldValidate: true })
-    setValue('password', demoCredentials.password, { shouldValidate: true })
   }
 
   return (
@@ -222,26 +213,12 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
               </label>
             )}
             {mode === 'login' && (
-              <>
-                <div className="auth-options">
-                  <label>
-                    <input type="checkbox" /> <span>Remember me</span>
-                  </label>
-                  <Link to="/forgot-password">Forgot password?</Link>
-                </div>
-                <div className="demo-credential-box">
-                  <div>
-                    <strong>Demo workspace access</strong>
-                    <small>Use the local preview account</small>
-                  </div>
-                  <button type="button" onClick={fillDemoCredentials}>
-                    Fill demo details
-                  </button>
-                  <code>
-                    {demoCredentials.email} · {demoCredentials.password}
-                  </code>
-                </div>
-              </>
+              <div className="auth-options">
+                <label>
+                  <input type="checkbox" /> <span>Remember me</span>
+                </label>
+                <Link to="/forgot-password">Forgot password?</Link>
+              </div>
             )}
             {loginError && (
               <div className="auth-error-box" role="alert">
@@ -282,7 +259,7 @@ export function AuthScreen({ mode }: { mode: AuthMode }) {
           <div className="auth-security-note">
             <ShieldCheck size={14} />
             <span>
-              Demo data only. No account or password is sent to a server.
+              Your credentials are kept secure and never shared.
             </span>
           </div>
         </div>

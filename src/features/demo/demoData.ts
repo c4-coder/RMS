@@ -5,8 +5,8 @@ const daysAgo = (days: number) => new Date(now.getTime() - days * 86400000).toIS
 const daysFromNow = (days: number) => new Date(now.getTime() + days * 86400000).toISOString()
 
 export const demoCredentials = {
-  email: 'alex@northstar.example',
-  password: 'AlfrescoDemo2026!',
+  email: 'admin@alfresco.com',
+  password: 'Admin@123',
 }
 
 export const demoItems: RepositoryRecord[] = [
